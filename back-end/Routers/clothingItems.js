@@ -23,4 +23,36 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Ottenere un capo di abbigliamento per ID
+router.get('/:id', async (req, res) => {
+    try {
+        const clothingItem = await ClothingItem.findById(req.params.id);
+        if (!clothingItem) {
+            return res.status(404).send('Clothing item not found');
+        }
+        res.send(clothingItem);
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
+router.put('/:id/repairStatus', async (req, res) => {
+    try {
+        const { repairStatus } = req.body;
+        const clothingItem = await ClothingItem.findByIdAndUpdate(
+            req.params.id,
+            { repairStatus },
+            { new: true }
+        );
+        if (!clothingItem) {
+            return res.status(404).send('Clothing item not found');
+        }
+        res.json(clothingItem);
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+});
+
+module.exports = router;
+
 module.exports = router;

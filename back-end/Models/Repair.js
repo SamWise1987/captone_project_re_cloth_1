@@ -8,6 +8,7 @@ const repairSchema = new mongoose.Schema({
     repairDate: { type: Date, default: Date.now },
     condition: String,
     cost: Number,
+    imageUrl: String,
     clothingTypes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ClothingItem'}],
     stateOfPayment: { type: String, default: 'non pagato'},
 });

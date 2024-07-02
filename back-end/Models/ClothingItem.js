@@ -9,6 +9,11 @@ const clothingItemSchema = new mongoose.Schema({
     condition: String,
     photo: String,
     registrationDate: { type: Date, default: Date.now },
+    repairStatus: {
+        type: String,
+        enum: ['pending', 'in progress', 'completed', 'not applicable'],
+        default: 'pending'
+    }
 });
 
 module.exports = mongoose.model('ClothingItem', clothingItemSchema);
