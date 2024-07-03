@@ -8,7 +8,7 @@ const ClothingList = () => {
     useEffect(() => {
         const fetchClothingItems = async () => {
             try {
-                const response = await axios.get('/api/clothingitems');
+                const response = await axios.get('http://localhost:3000/clothingitems');
                 setClothingItems(response.data);
             } catch (error) {
                 console.error("Errore nel recupero degli abiti:", error);

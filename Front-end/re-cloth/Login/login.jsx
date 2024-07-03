@@ -11,7 +11,7 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const endpoint = role === 'user' ? '/user/login' : '/repairers/login';
+            const endpoint = role === 'user' ? '/user/login' : '/repairers/login'; //Qui devo mettere il path corretto? Quindi: http://localhost:3000/user/login e http://localhost:3000/repairers/login?
             const response = await axios.post(endpoint, { username, password });
             const { token } = response.data;
             localStorage.setItem('auth-token', token);

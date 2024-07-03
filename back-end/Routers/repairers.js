@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 router.get('/repairers', async (req, res) => {
     const clothingId = req.query.clothingId;
     const repairers = await Repairer.find({ clothingTypes: clothingId }).populate('clothingTypes');
-    // Calcola il rating medio per ogni riparatore
+    // Calcolo il rating medio per ogni riparatore
     const repairersWithAverageRating = repairers.map(repairer => {
         const averageRating = repairer.ratings.reduce((a, b) => a + b, 0) / repairer.ratings.length;
         return { ...repairer._doc, averageRating };

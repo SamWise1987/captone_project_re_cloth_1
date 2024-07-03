@@ -1,11 +1,40 @@
 const express = require('express');
 const ClothingItem = require('../Models/ClothingItem');
 const router = express.Router();
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('../Cloudinary/cloudinaryConfig');
+
+//Configuro multer
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'clothing-reparation-folder',
+        format: async (req, res) => 'jpeg',
+        public_id: (req, file) => `${Date.now()}-${file.originalname}`,
+    },
+
+});
+
+const upload = multer({ storage: storage });
+
 
 // Creare un nuovo capo di abbigliamento
-router.post('/', async (req, res) => {
+router.post('/', upload.array ('photos', 10), async (req, res) => {
     try {
-        const clothingItem = new ClothingItem(req.body);
+        const { type, description, name, material, condition, userId } = req.body;
+        const photos = req.files.map (file => file.path);
+
+        const clothingItem = new ClothingItem({
+            type,
+            description,
+            name,
+            material,
+            condition,
+            userId,
+            photo: photos,
+        });
+
         await clothingItem.save();
         res.status(201).send(clothingItem);
     } catch (error) {
@@ -55,4 +84,3 @@ router.put('/:id/repairStatus', async (req, res) => {
 
 module.exports = router;
 
-module.exports = router;
