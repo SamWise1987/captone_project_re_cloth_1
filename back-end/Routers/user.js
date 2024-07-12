@@ -22,7 +22,9 @@ router.post('/', async (req, res) => {
             phone: req.body.phone
         });
         await user.save();
-        res.status(201).send(user);
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(201).send({ token, userId: user._id, name: user.name || user.username });
     } catch (error) {
         res.status(400).send(error);
     }
@@ -63,7 +65,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
         return res.status(400).send('Invalid email or password');
     }
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.send({ token, userId: user._id, name: user.name || user.username });
 });
 
@@ -71,6 +73,8 @@ router.post('/login', async (req, res) => {
 router.get('/protected-route', auth, (req, res) => {
     res.send('This is a protected route');
 });
+
+module.exports = router;
 
 // Ottenere gli articoli di abbigliamento per utente
 router.get('/clothingitems/user', auth, async (req, res) => {

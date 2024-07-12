@@ -9,7 +9,7 @@ const SignUpForm = ({ setShowSignUp }) => {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
-    const [isProfessional, setIsProfessional] = useState(false);  // Stato per tracciare se è un professionista
+    const [isProfessional, setIsProfessional] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSignUp = async (e) => {
@@ -26,7 +26,7 @@ const SignUpForm = ({ setShowSignUp }) => {
                 phone
             });
             console.log('User created:', response.data);
-            setShowSignUp(false);  // Torna al form di login dopo la registrazione
+            setShowSignUp(false);
         } catch (error) {
             setErrorMessage('Registrazione fallita. Controlla i dati inseriti.');
         }

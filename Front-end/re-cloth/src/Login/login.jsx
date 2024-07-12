@@ -3,8 +3,7 @@ import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
 import { AuthContext } from '../AuthProvider/authProvider';
 import './Login.css';
-import SignUpForm from '../Signin/signIn';  // Importa il componente di registrazione
-import '../App.css';
+import SignUpForm from '../Signin/signIn';
 
 const LoginForm = ({ show, handleClose }) => {
     const { setAuthToken, setUserRole, setUserName } = useContext(AuthContext);
@@ -12,37 +11,29 @@ const LoginForm = ({ show, handleClose }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [showSignUp, setShowSignUp] = useState(false);  // Stato per mostrare il form di registrazione
+    const [showSignUp, setShowSignUp] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const endpoint = role === 'user' ? 'http://localhost:3000/user/login' : 'http://localhost:3000/repairers/login';
-            console.log(`Sending POST request to ${endpoint} with email: ${email} and role: ${role}`);  // Log di debug
             const response = await axios.post(endpoint, { email, password });
-            console.log('Response:', response);  // Log di debug
 
-            // De-strutturare correttamente l'oggetto response.data
-            if (response && response.data) {
-                const { token, userId, name } = response.data; // Assumi che l'ID utente sia restituito qui
-                setAuthToken(token);
-                setUserRole(role);
-                setUserName(name);
-                localStorage.setItem('auth-token', token);
-                localStorage.setItem('user-id', userId); // Salva l'ID utente nel local storage
-                localStorage.setItem('user-role', role);
-                localStorage.setItem('user-name', name); // Salva il nome dell'utente nel local storage
+            const { token, userId, name } = response.data;
+            setAuthToken(token);
+            setUserRole(role);
+            setUserName(name);
+            localStorage.setItem('auth-token', token);
+            localStorage.setItem('user-id', userId);
+            localStorage.setItem('user-role', role);
+            localStorage.setItem('user-name', name);
 
-                if (role === 'user') {
-                    window.location.href = '/dashboard';
-                } else {
-                    window.location.href = '/repairer-tasks';
-                }
+            if (role === 'user') {
+                window.location.href = '/dashboard';
             } else {
-                throw new Error('Login failed: Invalid response from server');
+                window.location.href = '/repairer-tasks';
             }
         } catch (error) {
-            console.error('Login error:', error.message || error);
             setErrorMessage('Login fallito. Controlla le tue credenziali.');
         }
     };
@@ -54,7 +45,7 @@ const LoginForm = ({ show, handleClose }) => {
             </Modal.Header>
             <Modal.Body>
                 {showSignUp ? (
-                    <SignUpForm setShowSignUp={setShowSignUp} />  // Mostra il form di registrazione
+                    <SignUpForm setShowSignUp={setShowSignUp} />
                 ) : (
                     <form className="login-form" onSubmit={handleLogin}>
                         <div className="dropdown">

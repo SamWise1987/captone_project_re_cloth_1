@@ -1,9 +1,10 @@
-// src/RequestReparationPage/RepairForm.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './RepairForm.css';
+import { AuthContext } from '../AuthProvider/authProvider';
 
 const RepairForm = () => {
+    const { authToken, userId } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         itemType: '',
         description: '',
@@ -22,7 +23,7 @@ const RepairForm = () => {
     };
 
     const handleFileChange = (e) => {
-        setFormData({ ...formData, photos: [...e.target.files] });
+        setFormData({ ...formData, photos: e.target.files });
     };
 
     const handleSubmit = async (e) => {
@@ -36,19 +37,21 @@ const RepairForm = () => {
         }
 
         const formDataToSend = new FormData();
+        formDataToSend.append('userId', userId);
         formDataToSend.append('type', formData.itemType);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
         formDataToSend.append('material', formData.material);
         formDataToSend.append('condition', formData.condition);
-        formData.photos.forEach((photo) => {
-            formDataToSend.append('photos', photo);
+        Object.keys(formData.photos).forEach(key => {
+            formDataToSend.append("photos[]", formData.photos[key]);
         });
 
         try {
             const response = await axios.post('http://localhost:3000/clothingitems', formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${authToken}`
                 },
             });
             setSuccessMessage('Richiesta inviata con successo!');

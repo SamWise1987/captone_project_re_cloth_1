@@ -6,7 +6,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('../Cloudinary/cloudinaryConfig');
 const User = require('../Models/User')
 
-// Configuro multer
+
 // Configuro multer
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
@@ -20,7 +20,7 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 // Creare un nuovo capo di abbigliamento
-router.post('/', upload.array('photos', 10), async (req, res) => {
+router.post('/', upload.any('photos'), async (req, res) => {
     try {
         console.log('Request Body:', req.body);
         console.log('Uploaded Files:', req.files); // Log dei file caricati

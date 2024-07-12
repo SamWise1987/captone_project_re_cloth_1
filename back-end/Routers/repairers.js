@@ -5,6 +5,10 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
+//const auth = require('../OAuth/jwt');
+
+
+
 
 // Creare un nuovo riparatore
 router.post('/', async (req, res) => {
@@ -26,9 +30,9 @@ router.post('/', async (req, res) => {
         });
         console.log('Repairer Data:', repairer)
         await repairer.save();
-        res.status(201).send(repairer);
+        const token = jwt.sign({ _id: repairer._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(201).send({ token, userId: repairer._id, name: repairer.name || repairer.username });
     } catch (error) {
-        console.log(error);
         res.status(400).send(error);
     }
 });
@@ -62,14 +66,13 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const repairer = await Repairer.findOne({ email });
     if (!repairer) {
-        return res.status(400).send('Invalid username or password 1');
+        return res.status(400).send('Invalid email or password');
     }
     const validPassword = await bcrypt.compare(password, repairer.password);
     if (!validPassword) {
-        return res.status(400).send('Invalid username or password 2');
+        return res.status(400).send('Invalid email or password');
     }
-    const token = jwt.sign({ _id: repairer._id }, process.env.JWT_SECRET);
-    res.header('auth-token', token).send(token);
+    const token = jwt.sign({ _id: repairer._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.send({ token, userId: repairer._id, name: repairer.name || repairer.username });
 });
 
