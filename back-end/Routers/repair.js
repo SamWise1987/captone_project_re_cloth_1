@@ -106,4 +106,23 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+
+router.put('/:id/repairStatus', async (req, res) => {
+    try {
+        const { repairStatus } = req.body;
+        const repair = await Repair.findByIdAndUpdate(
+            req.params.id,
+            { repairStatus },
+            { new: true }
+        ).populate('userId', 'name email');
+        if (!repair) {
+            return res.status(404).send('Repair not found');
+        }
+        res.send(repair);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send(error);
+    }
+});
+
 module.exports = router;

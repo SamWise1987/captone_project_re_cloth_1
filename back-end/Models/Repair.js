@@ -11,6 +11,7 @@ const repairSchema = new mongoose.Schema({
     imageUrl: String,
     clothingTypes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ClothingItem'}],
     stateOfPayment: { type: String, default: 'non pagato'},
+    repairStatus: { type: String, enum: ['pending', 'in progress', 'completed', 'not applicable'], default: 'pending' },
 });
 
 module.exports = mongoose.model('Repair', repairSchema);

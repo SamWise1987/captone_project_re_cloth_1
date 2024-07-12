@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { ListGroup, Form, Collapse } from 'react-bootstrap';
 import axios from 'axios';
 import './ListClothingGroup.css';
-import '../App.css'
+import '../App.css';
 
-const ClothingList = () => {
+const ClothingList = ({ updateRepairStatus }) => {
     const [clothingItems, setClothingItems] = useState([]);
     const [expandedItem, setExpandedItem] = useState(null);
 
     useEffect(() => {
         const fetchClothingItems = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/clothingitems');
+                const response = await axios.get('http://localhost:3000/api/clothingitems');
                 setClothingItems(response.data);
             } catch (error) {
                 console.error("Errore nel recupero degli abiti:", error);
@@ -20,16 +20,6 @@ const ClothingList = () => {
 
         fetchClothingItems();
     }, []);
-
-    const updateRepairStatus = async (id, status) => {
-        try {
-            console.log(`Updating repair status for item ID: ${id} to ${status}`); // Log per debugging
-            const response = await axios.put(`http://localhost:3000/clothingitems/${id}/repairStatus`, { repairStatus: status });
-            setClothingItems(clothingItems.map(item => item._id === id ? response.data : item));
-        } catch (error) {
-            console.error("Errore nell'aggiornamento dello stato della riparazione:", error);
-        }
-    };
 
     const getStatusClass = (status) => {
         switch (status) {

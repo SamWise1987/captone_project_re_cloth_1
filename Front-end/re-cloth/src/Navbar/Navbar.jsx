@@ -4,7 +4,6 @@ import { AuthContext } from '../AuthProvider/authProvider';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css';
-//import logo from '../Logo/Logo_Re_cloth.png';
 import logo from '../Logo/LRC.png';
 import '../App.css';
 

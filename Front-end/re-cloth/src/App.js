@@ -7,10 +7,10 @@ import Services from './services/Services';
 import RepairerList from './repairerCard/RepairerListOfCard';
 import RepairForm from './RequestReparationPage/RepairForm';
 import Footer from './Footer/Footer';
-import Login from "./Login/login";
+import LoginForm from "./Login/login"; // Assicurati di importare LoginForm correttamente
 import About from "./About/about";
-import UserDashboard from './Dashboard/UserDashboard'; // Importa UserDashboard
-import RepairerDashboard from './Dashboard/RepairerDashboard'; // Importa RepairerDashboard
+import UserDashboard from './Dashboard/UserDashboard';
+import RepairerDashboard from './Dashboard/RepairerDashboard';
 import './App.css'
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
             } />
           </Routes>
           <Footer />
+          <LoginForm show={showLogin} handleClose={toggleLogin} />
         </Router>
       </AuthProvider>
   );

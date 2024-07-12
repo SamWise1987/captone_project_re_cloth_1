@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ListGroup } from 'react-bootstrap';
 import '../App.css';
-import './UserDash.css'
+import './UserDash.css';
 
 const UserDashboard = () => {
     const [clothingItems, setClothingItems] = useState([]);
