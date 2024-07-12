@@ -1,10 +1,10 @@
 {
   "name": "capstone_project_re_cloth",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,11 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mongodb-connection-string-url": "^2.3.0",
     "mongoose": "^8.4.3",
     "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0"
-  }
+  },
+  "description": ""
 }

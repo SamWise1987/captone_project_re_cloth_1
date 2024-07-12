@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+.special-elite-regular {
+    font-family: "Special Elite", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dashboard-title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.clothing-list-container {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.clothing-list {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+}
+
+.main-content {
+    padding-top: 20px;
+}

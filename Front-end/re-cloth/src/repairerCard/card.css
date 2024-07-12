@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+.special-elite-regular {
+    font-family: "Special Elite", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.repairer-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.repairer-card .repairer-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.repairer-card .repairer-specialization {
+    font-size: 1rem;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.repairer-card .repairer-info {
+    font-size: 0.875rem;
+    color: #000;
+    line-height: 1.5;
+}
+
+.repairer-card .list-group-item {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #fff;
+    color: #000;
+}
+
+.repairer-card .contact-button {
+    width: 100%;
+    background-color: #000;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.repairer-card .contact-button:hover {
+    background-color: #333;
+}

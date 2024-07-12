@@ -7,7 +7,7 @@ const clothingItemSchema = new mongoose.Schema({
     description: String,
     material: String,
     condition: String,
-    photo: String,
+    photos: [String],
     registrationDate: { type: Date, default: Date.now },
     repairStatus: {
         type: String,

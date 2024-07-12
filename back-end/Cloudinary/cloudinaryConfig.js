@@ -9,13 +9,3 @@ cloudinary.config({
 });
 
 // Configuro multer qui come "globale" oppure per ogni rotta in cui lo devo utilizzare?
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: 'clothing-reparation-folder',
-        format: async (req, res) => 'jpeg',
-        public_id: (req, file) => `${Date.now()}-${file.originalname}`,
-        },
-    });
-
-const upload = multer({ storage: storage });
