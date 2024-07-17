@@ -21,7 +21,7 @@ const UserDashboard = () => {
 
     const fetchClothingItems = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/clothingitems/user', {
+            const response = await axios.get('http://localhost:3000/clothingitems/:id', {
                 headers: { 'auth-token': token },
                 params: { userId }
             });

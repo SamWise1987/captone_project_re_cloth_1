@@ -11,7 +11,7 @@ const ClothingList = ({ updateRepairStatus }) => {
     useEffect(() => {
         const fetchClothingItems = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/clothingitems');
+                const response = await axios.get('http://localhost:3000/clothingitems');
                 setClothingItems(response.data);
             } catch (error) {
                 console.error("Errore nel recupero degli abiti:", error);
@@ -40,6 +40,16 @@ const ClothingList = ({ updateRepairStatus }) => {
         setExpandedItem(expandedItem === id ? null : id);
     };
 
+    const handleStatusChange = async (id, newStatus) => {
+        await updateRepairStatus(id, newStatus);
+
+        setClothingItems(prevItems =>
+            prevItems.map(item =>
+                item._id === id ? { ...item, repairStatus: newStatus } : item
+            )
+        );
+    };
+
     return (
         <ListGroup>
             {clothingItems.map((item) => (
@@ -56,7 +66,7 @@ const ClothingList = ({ updateRepairStatus }) => {
                         <Form.Control
                             as="select"
                             value={item.repairStatus}
-                            onChange={(e) => updateRepairStatus(item._id, e.target.value)}
+                            onChange={(e) => handleStatusChange(item._id, e.target.value)}
                             className="w-auto ml-3"
                         >
                             <option value="pending">Pending</option>

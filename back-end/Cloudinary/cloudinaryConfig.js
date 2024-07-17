@@ -7,7 +7,7 @@ dotenv.config();
 
 console.log(process.env.CLOUD_NAME);
 console.log('CLOUD_NAME:', process.env.CLOUD_NAME); // Aggiungi questo
-console.log('API_KEY:', process.env.API_KEYS); // Aggiungi questo
+console.log('API_KEY:', process.env.API_KEY); // Aggiungi questo
 console.log('API_SECRET:', process.env.API_SECRET); // Aggiungi questo
 
 cloudinary.config({

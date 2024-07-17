@@ -2,9 +2,12 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import './RepairForm.css';
 import { AuthContext } from '../AuthProvider/authProvider';
+//import Login from '../Login/login'
 
 const RepairForm = () => {
     const { authToken, userId } = useContext(AuthContext);
+    console.log('Auth Token:', authToken);
+    console.log('User ID:', userId);
     const [formData, setFormData] = useState({
         itemType: '',
         description: '',

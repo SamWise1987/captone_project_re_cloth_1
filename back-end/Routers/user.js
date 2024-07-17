@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
         return res.status(400).send('Invalid email or password');
     }
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.send({ token, userId: user._id, name: user.name || user.username });
+    res.send({ token, userId: user._id, name: user.name });
 });
 
 // Rotte protette

@@ -6,7 +6,7 @@ import './Login.css';
 import SignUpForm from '../Signin/signIn';
 
 const LoginForm = ({ show, handleClose }) => {
-    const { setAuthToken, setUserRole, setUserName } = useContext(AuthContext);
+    const { setAuthToken, setUserRole, setUserName, setUserId } = useContext(AuthContext);
     const [role, setRole] = useState('user');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +23,7 @@ const LoginForm = ({ show, handleClose }) => {
             setAuthToken(token);
             setUserRole(role);
             setUserName(name);
+            setUserId(userId);
             localStorage.setItem('auth-token', token);
             localStorage.setItem('user-id', userId);
             localStorage.setItem('user-role', role);
